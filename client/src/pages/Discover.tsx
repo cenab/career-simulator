@@ -48,8 +48,14 @@ interface SceneCardProps {
 }
 
 function SceneCard({ title, subtitle, creator, thumbnail }: SceneCardProps) {
+  const [, setLocation] = useLocation();
+  
   return (
-    <Card className="flex-shrink-0 w-[240px] h-[320px] hover-elevate cursor-pointer overflow-hidden border-card-border bg-card relative group" data-testid={`card-scene-${title.toLowerCase().replace(/\s+/g, '-')}`}>
+    <Card 
+      className="flex-shrink-0 w-[240px] h-[320px] hover-elevate cursor-pointer overflow-hidden border-card-border bg-card relative group" 
+      onClick={() => setLocation('/scene/1')}
+      data-testid={`card-scene-${title.toLowerCase().replace(/\s+/g, '-')}`}
+    >
       <div className="relative w-full h-full">
         <img src={thumbnail} alt={title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />

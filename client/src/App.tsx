@@ -8,6 +8,7 @@ import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
 import Discover from "@/pages/Discover";
 import ChatSimulation from "@/pages/ChatSimulation";
+import SceneDetail from "@/pages/SceneDetail";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/signup" component={Signup} />
       <Route path="/home" component={Discover} />
       <Route path="/discover" component={Discover} />
+      <Route path="/scene/:id" component={SceneDetail} />
       <Route path="/chat/:id" component={ChatSimulation} />
       <Route path="/landing" component={Landing} />
       <Route component={NotFound} />
