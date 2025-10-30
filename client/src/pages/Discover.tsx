@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Plus, Compass, Sparkles, Search, ChevronLeft, MessageSquare, Menu, ChevronRight, User, Settings as SettingsIcon, FileText, LogOut, ChevronDown } from "lucide-react";
+import { Plus, Compass, Sparkles, Search, ChevronLeft, MessageSquare, Menu, ChevronRight, User, Settings as SettingsIcon, FileText, LogOut, ChevronDown, UserCircle, Image } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "wouter";
 import { useState, useRef } from "react";
@@ -183,9 +183,23 @@ export default function Discover() {
             </div>
 
             <div className="p-3 flex justify-center">
-              <Button variant="default" size="icon" className="w-10 h-10" data-testid="button-create-collapsed">
-                <Plus className="w-4 h-4" />
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="default" size="icon" className="w-10 h-10" data-testid="button-create-collapsed">
+                    <Plus className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-56">
+                  <DropdownMenuItem onClick={() => setLocation('/create-character')} data-testid="menu-create-character">
+                    <UserCircle className="w-4 h-4 mr-2" />
+                    Character
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLocation('/create-scene-choice')} data-testid="menu-create-scene">
+                    <Image className="w-4 h-4 mr-2" />
+                    Scene
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             <nav className="flex-1 px-3 space-y-1">
@@ -228,10 +242,24 @@ export default function Discover() {
             </div>
 
             <div className="p-3">
-              <Button variant="default" className="w-full justify-start gap-2" data-testid="button-create">
-                <Plus className="w-4 h-4" />
-                Create
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="default" className="w-full justify-start gap-2" data-testid="button-create">
+                    <Plus className="w-4 h-4" />
+                    Create
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-56">
+                  <DropdownMenuItem onClick={() => setLocation('/create-character')} data-testid="menu-create-character">
+                    <UserCircle className="w-4 h-4 mr-2" />
+                    Character
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLocation('/create-scene-choice')} data-testid="menu-create-scene">
+                    <Image className="w-4 h-4 mr-2" />
+                    Scene
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             <nav className="flex-1 px-3 space-y-1">

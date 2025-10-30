@@ -12,6 +12,9 @@ import SceneDetail from "@/pages/SceneDetail";
 import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
 import Policies from "@/pages/Policies";
+import CreateCharacter from "@/pages/CreateCharacter";
+import CreateSceneChoice from "@/pages/CreateSceneChoice";
+import CreateScene from "@/pages/CreateScene";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -27,6 +30,9 @@ function Router() {
       <Route path="/profile" component={Profile} />
       <Route path="/settings" component={Settings} />
       <Route path="/policies" component={Policies} />
+      <Route path="/create-character" component={CreateCharacter} />
+      <Route path="/create-scene-choice" component={CreateSceneChoice} />
+      <Route path="/create-scene/:type" component={CreateScene} />
       <Route path="/landing" component={Landing} />
       <Route component={NotFound} />
     </Switch>
