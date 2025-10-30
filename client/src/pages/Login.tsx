@@ -45,7 +45,7 @@ export default function Login() {
       </nav>
 
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="relative flex items-center justify-center w-full max-w-[1440px]">
+        <div className="relative flex items-center justify-end w-full max-w-[1440px] px-4 lg:px-12">
           <div className="absolute w-[75%] h-[580px] rounded-2xl overflow-hidden top-1/2 -translate-y-1/2 left-[23%] hidden lg:block">
             <img
               src={heroImage}
@@ -54,7 +54,7 @@ export default function Login() {
             />
           </div>
 
-          <div className="relative z-10 w-full max-w-sm bg-[#2C2C2C] border border-gray-700 rounded-2xl p-8 shadow-2xl ml-4 lg:ml-12">
+          <div className="relative z-10 w-full max-w-sm bg-[#2C2C2C] border border-gray-700 rounded-2xl p-8 shadow-2xl">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-white mb-2" data-testid="heading-login">
                 Welcome back to CareerSim
