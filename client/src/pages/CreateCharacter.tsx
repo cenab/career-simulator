@@ -68,14 +68,13 @@ export default function CreateCharacter() {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
+        <div className="px-8 py-4">
+          <Button variant="ghost" onClick={() => setLocation('/home')} data-testid="button-back">
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Back
+          </Button>
+        </div>
         <div className="max-w-3xl mx-auto p-8 space-y-6">
-          <div>
-            <Button variant="ghost" onClick={() => setLocation('/home')} data-testid="button-back">
-              <ChevronLeft className="w-4 h-4 mr-2" />
-              Back
-            </Button>
-          </div>
-
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <Avatar className="w-24 h-24 bg-muted">
