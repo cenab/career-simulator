@@ -121,21 +121,29 @@ export default function ChatSimulation() {
                     <Play className="w-3 h-3 text-white/50" />
                   </div>
                   <div className="bg-card rounded-2xl rounded-tl-sm p-4 text-sm text-card-foreground">
-                    <p className="italic text-muted-foreground mb-2">
-                      [Blitz] - out on a mission with his imp gang in the outer rims of Hell, where unknowing even to Lucifer himself is Midnight Morningstar in an orphanage.
-                    </p>
-                    <p className="mb-2">
-                      Lucifer doesn't know he has kids, since Lilith hid her pregnancy and gave them away at birth for them. They are currently tracking a demon that went missing for the job, which they normally don't do but they need the money.
-                    </p>
                     <p className="mb-2 italic text-muted-foreground">
-                      "C'mon dipshits, I wanna finish this fast." he yells
+                      You were sitting in class, looking at the clock. The minutes were going by slowly, really slowly. That's when there's a knock on the door.
                     </p>
                     <p className="mb-2">
-                      [Moxxie] - "Boss... we will finish it when we finish it..."
+                      The teacher walks over and opens the door, and there stands the whole task force 141, aka: Your guardians.
                     </p>
-                    <p className="italic text-muted-foreground">
-                      [Millie] - "Ugh... Blitz is right... the outer rims of Hell are a waste. The sooner we finish the better."
+                    <p className="mb-2">
+                      Price: "Excuse me, we've here to pull DizzyingArredale3060 out of class. It's an emergency." The teacher looks stunned at the 6 men outside her classroom.
                     </p>
+                    <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
+                      <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-like">
+                        <ThumbsUp className="w-3.5 h-3.5" />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-dislike">
+                        <ThumbsDown className="w-3.5 h-3.5" />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-copy">
+                        <Copy className="w-3.5 h-3.5" />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-7 w-7 ml-auto" data-testid="button-more">
+                        <MoreHorizontal className="w-3.5 h-3.5" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

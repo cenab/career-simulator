@@ -20,8 +20,14 @@ interface CharacterCardProps {
 }
 
 function CharacterCard({ title, creator, tagline, thumbnail, messageCount }: CharacterCardProps) {
+  const [, setLocation] = useLocation();
+  
   return (
-    <Card className="flex-shrink-0 w-[280px] hover-elevate cursor-pointer overflow-hidden border-card-border bg-card" data-testid={`card-character-${title.toLowerCase().replace(/\s+/g, '-')}`}>
+    <Card 
+      className="flex-shrink-0 w-[280px] hover-elevate cursor-pointer overflow-hidden border-card-border bg-card"
+      onClick={() => setLocation('/chat/1')}
+      data-testid={`card-character-${title.toLowerCase().replace(/\s+/g, '-')}`}
+    >
       <div className="flex gap-3 p-4">
         <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
           <img src={thumbnail} alt={title} className="w-full h-full object-cover" />
