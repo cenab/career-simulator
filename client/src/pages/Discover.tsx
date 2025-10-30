@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Plus, Compass, Sparkles, Search, ChevronLeft, MessageSquare, Menu } from "lucide-react";
+import { Plus, Compass, Sparkles, Search, ChevronLeft, MessageSquare, Menu, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "wouter";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import crisisImage from "@assets/generated_images/Crisis_Manager_scene_thumbnail_43e30343.png";
 import startupImage from "@assets/generated_images/Startup_Chaos_scene_thumbnail_97e7d32a.png";
 import interviewImage from "@assets/generated_images/Interview_Practice_scene_thumbnail_ce7d07aa.png";
@@ -71,6 +71,20 @@ function SceneCard({ title, subtitle, creator, thumbnail }: SceneCardProps) {
 export default function Discover() {
   const [, setLocation] = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const forYouRef = useRef<HTMLDivElement>(null);
+  const scenesRef = useRef<HTMLDivElement>(null);
+  const featuredRef = useRef<HTMLDivElement>(null);
+  const popularRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
+    if (ref.current) {
+      const scrollAmount = 300;
+      ref.current.scrollBy({
+        left: direction === 'right' ? scrollAmount : -scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const forYouCharacters = [
     {
@@ -285,8 +299,28 @@ export default function Discover() {
             </div>
 
           <section>
-            <h2 className="text-xl font-semibold text-foreground mb-4" data-testid="heading-for-you">For you</h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-foreground" data-testid="heading-for-you">For you</h2>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(forYouRef, 'left')}
+                  data-testid="button-scroll-left-for-you"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(forYouRef, 'right')}
+                  data-testid="button-scroll-right-for-you"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+            <div ref={forYouRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
               {forYouCharacters.map((char, i) => (
                 <CharacterCard key={i} {...char} />
               ))}
@@ -294,8 +328,28 @@ export default function Discover() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-foreground mb-4" data-testid="heading-scenes">Scenes</h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-foreground" data-testid="heading-scenes">Scenes</h2>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(scenesRef, 'left')}
+                  data-testid="button-scroll-left-scenes"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(scenesRef, 'right')}
+                  data-testid="button-scroll-right-scenes"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+            <div ref={scenesRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
               {scenes.map((scene, i) => (
                 <SceneCard key={i} {...scene} />
               ))}
@@ -303,8 +357,28 @@ export default function Discover() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-foreground mb-4" data-testid="heading-featured">Featured</h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-foreground" data-testid="heading-featured">Featured</h2>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(featuredRef, 'left')}
+                  data-testid="button-scroll-left-featured"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(featuredRef, 'right')}
+                  data-testid="button-scroll-right-featured"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+            <div ref={featuredRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
               {featured.map((char, i) => (
                 <CharacterCard key={i} {...char} />
               ))}
@@ -312,8 +386,28 @@ export default function Discover() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-foreground mb-4" data-testid="heading-popular">Popular</h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-foreground" data-testid="heading-popular">Popular</h2>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(popularRef, 'left')}
+                  data-testid="button-scroll-left-popular"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => scroll(popularRef, 'right')}
+                  data-testid="button-scroll-right-popular"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+            <div ref={popularRef} className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
               {forYouCharacters.slice(0, 3).map((char, i) => (
                 <CharacterCard key={i} {...char} />
               ))}
