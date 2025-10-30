@@ -44,9 +44,17 @@ export default function Signup() {
         </div>
       </nav>
 
-      <div className="min-h-screen flex items-center justify-center p-4 lg:p-8">
-        <div className="relative w-full max-w-6xl flex items-center">
-          <div className="relative z-10 w-full max-w-sm bg-[#2C2C2C] border border-gray-700 rounded-2xl p-8 shadow-2xl lg:mr-8">
+      <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="relative flex items-center justify-center w-full max-w-[1440px]">
+          <div className="absolute w-[75%] h-[580px] rounded-2xl overflow-hidden top-1/2 -translate-y-1/2 left-[23%] hidden lg:block">
+            <img
+              src={heroImage}
+              alt="CareerSim"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="relative z-10 w-full max-w-sm bg-[#2C2C2C] border border-gray-700 rounded-2xl p-8 shadow-2xl ml-4 lg:ml-12">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-white mb-2" data-testid="heading-signup">
                 Get access to 500+ Scenarios
@@ -108,14 +116,6 @@ export default function Signup() {
               {" "}and{" "}
               <a href="#" className="text-gray-400 hover:underline">Privacy Policy</a>
             </p>
-          </div>
-
-          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[60%]">
-            <img
-              src={heroImage}
-              alt="CareerSim"
-              className="w-full h-auto rounded-2xl shadow-2xl"
-            />
           </div>
         </div>
       </div>
