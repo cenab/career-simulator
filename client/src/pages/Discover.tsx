@@ -194,14 +194,6 @@ export default function Discover() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="w-full h-10"
-                data-testid="button-nav-avatarsfx-collapsed"
-              >
-                <Sparkles className="w-4 h-4" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
                 className="w-full h-10 mt-4"
                 data-testid="button-search-collapsed"
               >
@@ -244,14 +236,6 @@ export default function Discover() {
               >
                 <Compass className="w-4 h-4" />
                 <span>Discover</span>
-              </Button>
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-3"
-                data-testid="button-nav-avatarsfx"
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>AvatarsFX</span>
               </Button>
               <div className="pt-4 px-3">
                 <Input

@@ -48,10 +48,6 @@ export default function ChatSimulation() {
                 <Compass className="w-4 h-4" />
                 <span>Discover</span>
               </Button>
-              <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-nav-avatarsfx">
-                <Sparkles className="w-4 h-4" />
-                <span>AvatarsFX</span>
-              </Button>
               <div className="pt-4 px-3">
                 <Input placeholder="Search" className="h-9" data-testid="input-sidebar-search" />
               </div>
