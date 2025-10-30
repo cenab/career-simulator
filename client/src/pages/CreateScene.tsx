@@ -94,7 +94,7 @@ export default function CreateScene() {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
-        <div className="border-b border-border px-8 py-4">
+        <div className="px-8 py-4">
           <div className="flex items-center justify-between w-full">
             <Button variant="ghost" onClick={() => step > 1 ? setStep(step - 1) : setLocation('/create-scene-choice')} data-testid="button-back">
               <ChevronLeft className="w-4 h-4 mr-2" />
