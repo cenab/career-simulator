@@ -143,7 +143,7 @@ export default function Discover() {
       <aside className={`${isCollapsed ? 'w-16' : 'w-64'} border-r border-border flex flex-col bg-card transition-all duration-200`}>
         {isCollapsed ? (
           <>
-            <div className="p-4 border-b border-border flex items-center justify-center">
+            <div className="p-4 flex items-center justify-center">
               <Button variant="ghost" size="icon" className="w-8 h-8" onClick={() => setIsCollapsed(false)} data-testid="button-expand-sidebar">
                 <Menu className="w-4 h-4" />
               </Button>
@@ -182,7 +182,7 @@ export default function Discover() {
               </Button>
             </nav>
 
-            <div className="p-3 border-t border-border flex justify-center">
+            <div className="p-3 flex justify-center">
               <Avatar className="w-8 h-8">
                 <AvatarFallback>DA</AvatarFallback>
               </Avatar>
@@ -190,7 +190,7 @@ export default function Discover() {
           </>
         ) : (
           <>
-            <div className="p-4 border-b border-border flex items-center justify-between">
+            <div className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded bg-foreground flex items-center justify-center">
                   <span className="text-background font-bold text-xs">CS</span>
@@ -251,7 +251,7 @@ export default function Discover() {
               </div>
             </nav>
 
-            <div className="p-3 border-t border-border">
+            <div className="p-3">
               <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-user-profile">
                 <Avatar className="w-8 h-8">
                   <AvatarFallback>DA</AvatarFallback>
