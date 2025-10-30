@@ -84,6 +84,7 @@ export default function SceneDetail() {
               <Button
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground px-12"
+                onClick={() => setLocation('/chat/1')}
                 data-testid="button-start-scene"
               >
                 Start Scene

@@ -1,180 +1,231 @@
-import { SidebarProvider } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/AppSidebar";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import ChatMessage from "@/components/ChatMessage";
-import ChatComposer from "@/components/ChatComposer";
-import CoachPanel from "@/components/CoachPanel";
-import { MoreVertical, RotateCcw, Download, Flag, Timer, ChevronRight, ChevronLeft } from "lucide-react";
-import { useState } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Textarea } from "@/components/ui/textarea";
+import { Plus, Compass, Sparkles, Search, ChevronLeft, Menu, Play, MessageSquare, Mic, Phone, ThumbsUp, ThumbsDown, Copy, MoreHorizontal, Share2, History, Palette, Pin, User, Sliders } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useLocation } from "wouter";
+import crisisImage from "@assets/generated_images/Crisis_Manager_scene_thumbnail_43e30343.png";
 
 export default function ChatSimulation() {
-  const style = {
-    "--sidebar-width": "16rem",
-    "--sidebar-width-icon": "3rem",
-  };
-
-  const [showCoachPanel, setShowCoachPanel] = useState(true);
-  const [objectives, setObjectives] = useState([
-    { id: "1", text: "Identify the scope of the breach", completed: true },
-    { id: "2", text: "Communicate with affected stakeholders", completed: true },
-    { id: "3", text: "Propose mitigation strategies", completed: false },
-    { id: "4", text: "Address long-term prevention", completed: false },
-  ]);
-  const [notes, setNotes] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      speaker: "ai" as const,
-      text: "Good morning. I understand there's been a security incident with one of our vendors. Can you walk me through what happened?",
-      timestamp: new Date(Date.now() - 300000),
-      characterName: "CEO Jennifer Martinez",
-    },
-    {
-      speaker: "user" as const,
-      text: "Yes, we discovered this morning that our payment processor experienced a data breach. Approximately 10,000 customer records may have been exposed.",
-      timestamp: new Date(Date.now() - 240000),
-    },
-    {
-      speaker: "event" as const,
-      text: "💡 Key Moment: Crisis communication decision point",
-      timestamp: new Date(Date.now() - 180000),
-    },
-    {
-      speaker: "ai" as const,
-      text: "This is serious. What's your recommended action plan?",
-      timestamp: new Date(Date.now() - 120000),
-      characterName: "CEO Jennifer Martinez",
-    },
-  ]);
-
-  const rubricScores = [
-    { dimension: "Clarity", score: 4.2, description: "Clear communication" },
-    { dimension: "Empathy", score: 3.8, description: "Stakeholder consideration" },
-    { dimension: "Decision Making", score: 4.5, description: "Effective solutions" },
-  ];
-
-  const handleSendMessage = (message: string) => {
-    setMessages([
-      ...messages,
-      {
-        speaker: "user" as const,
-        text: message,
-        timestamp: new Date(),
-      },
-    ]);
-
-    setTimeout(() => {
-      setMessages(prev => [
-        ...prev,
-        {
-          speaker: "ai" as const,
-          text: "I appreciate your thorough response. How do you plan to communicate this to our customers?",
-          timestamp: new Date(),
-          characterName: "CEO Jennifer Martinez",
-        },
-      ]);
-    }, 1500);
-  };
+  const [, setLocation] = useLocation();
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [message, setMessage] = useState("");
 
   return (
-    <SidebarProvider style={style as React.CSSProperties}>
-      <div className="flex h-screen w-full bg-background">
-        <AppSidebar currentPath="/chat" userHandle="johndoe" />
-        
-        <div className="flex flex-col flex-1 overflow-hidden">
-          <header className="border-b border-border bg-background px-4 py-3 flex items-center justify-between gap-4" data-testid="chat-header">
-            <div className="flex items-center gap-3">
+    <div className="flex h-screen w-full bg-background">
+      {/* Left Sidebar */}
+      <aside className={`${isCollapsed ? 'w-16' : 'w-64'} border-r border-border flex flex-col bg-card transition-all duration-200`}>
+        {isCollapsed ? (
+          <div className="p-4 flex items-center justify-center">
+            <Button variant="ghost" size="icon" className="w-8 h-8" onClick={() => setIsCollapsed(false)} data-testid="button-expand-sidebar">
+              <Menu className="w-4 h-4" />
+            </Button>
+          </div>
+        ) : (
+          <>
+            <div className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Avatar className="w-8 h-8 border border-primary/20">
-                  <AvatarFallback className="bg-primary/10 text-primary text-xs">JM</AvatarFallback>
-                </Avatar>
-                <div>
-                  <h1 className="text-sm font-semibold text-foreground" data-testid="text-scene-title">
-                    Crisis Manager: Vendor Breach
-                  </h1>
-                  <p className="text-xs text-muted-foreground">CEO Jennifer Martinez</p>
+                <div className="w-6 h-6 rounded bg-foreground flex items-center justify-center">
+                  <span className="text-background font-bold text-xs">CS</span>
                 </div>
+                <span className="font-semibold text-sm text-foreground">CareerSim</span>
               </div>
-              
-              <Badge variant="secondary" className="bg-muted text-foreground" data-testid="badge-timer">
-                <Timer className="w-3 h-3 mr-1" />
-                12:45
-              </Badge>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowCoachPanel(!showCoachPanel)}
-                data-testid="button-toggle-coach-panel"
-              >
-                {showCoachPanel ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+              <Button variant="ghost" size="icon" className="w-8 h-8" onClick={() => setIsCollapsed(true)} data-testid="button-collapse-sidebar">
+                <ChevronLeft className="w-4 h-4" />
               </Button>
-              
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" data-testid="button-chat-menu">
-                    <MoreVertical className="w-5 h-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => console.log("Restart")} data-testid="menu-restart">
-                    <RotateCcw className="w-4 h-4 mr-2" />
-                    Restart Simulation
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => console.log("Export")} data-testid="menu-export">
-                    <Download className="w-4 h-4 mr-2" />
-                    Export Transcript
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => console.log("Report")} data-testid="menu-report">
-                    <Flag className="w-4 h-4 mr-2" />
-                    Report Issue
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
             </div>
-          </header>
 
-          <div className="flex flex-1 overflow-hidden">
-            <div className="flex-1 flex flex-col overflow-hidden">
-              <div className="flex-1 overflow-y-auto p-6" data-testid="chat-messages">
-                <div className="max-w-4xl mx-auto">
-                  {messages.map((msg, i) => (
-                    <ChatMessage key={i} {...msg} />
-                  ))}
-                </div>
+            <div className="p-3">
+              <Button variant="default" className="w-full justify-start gap-2" data-testid="button-create">
+                <Plus className="w-4 h-4" />
+                Create
+              </Button>
+            </div>
+
+            <nav className="flex-1 px-3 space-y-1">
+              <Button variant="ghost" className="w-full justify-start gap-3" onClick={() => setLocation('/home')} data-testid="button-nav-discover">
+                <Compass className="w-4 h-4" />
+                <span>Discover</span>
+              </Button>
+              <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-nav-avatarsfx">
+                <Sparkles className="w-4 h-4" />
+                <span>AvatarsFX</span>
+              </Button>
+              <div className="pt-4 px-3">
+                <Input placeholder="Search" className="h-9" data-testid="input-sidebar-search" />
               </div>
 
-              <ChatComposer
-                onSend={handleSendMessage}
-                showToneHelper={true}
-              />
-            </div>
+              <div className="pt-6">
+                <h3 className="text-xs font-semibold text-muted-foreground px-3 mb-2">Today</h3>
+                <Button variant="ghost" className="w-full justify-start gap-3 text-sm" data-testid="button-recent-1">
+                  <Avatar className="w-6 h-6">
+                    <AvatarFallback className="text-xs">MC</AvatarFallback>
+                  </Avatar>
+                  <span className="truncate">Mha classroom #3</span>
+                </Button>
+                <Button variant="ghost" className="w-full justify-start gap-3 text-sm" data-testid="button-recent-2">
+                  <Avatar className="w-6 h-6">
+                    <AvatarFallback className="text-xs">FB</AvatarFallback>
+                  </Avatar>
+                  <span className="truncate">Funny Bones</span>
+                </Button>
+              </div>
+            </nav>
 
-            {showCoachPanel && (
-              <CoachPanel
-                objectives={objectives}
-                rubricScores={rubricScores}
-                notes={notes}
-                onObjectiveToggle={(id) => {
-                  setObjectives(objectives.map(obj =>
-                    obj.id === id ? { ...obj, completed: !obj.completed } : obj
-                  ));
-                }}
-                onNotesChange={setNotes}
+            <div className="p-3">
+              <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-user-profile">
+                <Avatar className="w-8 h-8">
+                  <AvatarFallback>DA</AvatarFallback>
+                </Avatar>
+                <span className="text-sm truncate">DizzyingArredale3060</span>
+              </Button>
+            </div>
+          </>
+        )}
+      </aside>
+
+      {/* Main Chat Area */}
+      <main 
+        className="flex-1 flex flex-col relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${crisisImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/90" />
+        
+        <div className="relative z-10 flex flex-col h-full">
+          {/* Character Header */}
+          <div className="flex flex-col items-center pt-12 pb-6">
+            <Avatar className="w-20 h-20 border-2 border-white/20 mb-3">
+              <AvatarFallback className="bg-white/10 text-white text-xl">TF</AvatarFallback>
+            </Avatar>
+            <h2 className="text-xl font-semibold text-white" data-testid="text-character-name">Task Force 141</h2>
+            <p className="text-sm text-white/70" data-testid="text-character-tagline">Pulling you out of class</p>
+            <p className="text-xs text-white/50">By @phila</p>
+          </div>
+
+          {/* Chat Messages */}
+          <div className="flex-1 overflow-y-auto px-8 pb-4">
+            <div className="max-w-3xl mx-auto space-y-4">
+              {/* AI Message */}
+              <div className="flex gap-3">
+                <Avatar className="w-8 h-8 flex-shrink-0">
+                  <AvatarFallback className="bg-muted text-xs">TF</AvatarFallback>
+                </Avatar>
+                <div className="flex-1 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-white">Task Force 141</span>
+                    <Play className="w-3 h-3 text-white/50" />
+                  </div>
+                  <div className="bg-card rounded-2xl rounded-tl-sm p-4 text-sm text-card-foreground">
+                    <p className="italic text-muted-foreground mb-2">
+                      [Blitz] - out on a mission with his imp gang in the outer rims of Hell, where unknowing even to Lucifer himself is Midnight Morningstar in an orphanage.
+                    </p>
+                    <p className="mb-2">
+                      Lucifer doesn't know he has kids, since Lilith hid her pregnancy and gave them away at birth for them. They are currently tracking a demon that went missing for the job, which they normally don't do but they need the money.
+                    </p>
+                    <p className="mb-2 italic text-muted-foreground">
+                      "C'mon dipshits, I wanna finish this fast." he yells
+                    </p>
+                    <p className="mb-2">
+                      [Moxxie] - "Boss... we will finish it when we finish it..."
+                    </p>
+                    <p className="italic text-muted-foreground">
+                      [Millie] - "Ugh... Blitz is right... the outer rims of Hell are a waste. The sooner we finish the better."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Message Input */}
+          <div className="p-4 border-t border-border/50 bg-background/80 backdrop-blur-sm">
+            <div className="max-w-3xl mx-auto relative">
+              <Textarea
+                placeholder="Message Task Force 141..."
+                className="min-h-[60px] pr-24 resize-none"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                data-testid="input-message"
               />
-            )}
+              <div className="absolute right-2 bottom-2 flex items-center gap-2">
+                <Button variant="ghost" size="icon" className="h-8 w-8" data-testid="button-voice">
+                  <Mic className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="icon" className="h-8 w-8" data-testid="button-call">
+                  <Phone className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </SidebarProvider>
+      </main>
+
+      {/* Right Sidebar */}
+      <aside className="w-80 border-l border-border bg-card flex flex-col">
+        <div className="p-4 border-b border-border">
+          <h3 className="font-semibold text-foreground mb-1" data-testid="text-scene-title-sidebar">Hell - Morningstar rediscovery</h3>
+          <div className="flex items-center gap-2 mb-3">
+            <Avatar className="w-8 h-8">
+              <AvatarFallback className="text-xs">TF</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm font-medium text-foreground">Task Force 141</p>
+              <p className="text-xs text-muted-foreground">By @phila</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <MessageSquare className="w-3 h-3" />
+              <span>2.4k</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <ThumbsUp className="w-3 h-3" />
+            </div>
+          </div>
+        </div>
+
+        <nav className="flex-1 p-3 space-y-1">
+          <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-new-chat">
+            <MessageSquare className="w-4 h-4" />
+            <span>New chat</span>
+          </Button>
+          <Button variant="ghost" className="w-full justify-between" data-testid="button-voice-option">
+            <div className="flex items-center gap-3">
+              <Mic className="w-4 h-4" />
+              <span>Voice</span>
+            </div>
+            <span className="text-xs text-muted-foreground">Default</span>
+          </Button>
+          <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-history">
+            <History className="w-4 h-4" />
+            <span>History</span>
+          </Button>
+          <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-customize">
+            <Sliders className="w-4 h-4" />
+            <span>Customize</span>
+          </Button>
+          <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-pinned">
+            <Pin className="w-4 h-4" />
+            <span>Pinned</span>
+          </Button>
+          <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-persona">
+            <User className="w-4 h-4" />
+            <span>Persona</span>
+          </Button>
+          <Button variant="ghost" className="w-full justify-between" data-testid="button-style">
+            <div className="flex items-center gap-3">
+              <Palette className="w-4 h-4" />
+              <span>Style</span>
+            </div>
+            <span className="text-xs text-muted-foreground">Repliyweak</span>
+          </Button>
+        </nav>
+      </aside>
+    </div>
   );
 }
