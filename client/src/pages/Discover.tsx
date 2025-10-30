@@ -289,7 +289,7 @@ export default function Discover() {
           </div>
         </header>
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-6xl mx-auto p-8 space-y-8">
+          <div className="max-w-[1440px] mx-auto p-8 space-y-8">
             <div>
               <h1 className="text-2xl font-semibold text-foreground mb-1">Welcome back,</h1>
               <div className="flex items-center gap-1">
