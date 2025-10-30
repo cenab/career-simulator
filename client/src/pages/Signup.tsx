@@ -58,7 +58,7 @@ export default function Signup() {
 
             <div className="space-y-3">
               <Button
-                className="w-full justify-center gap-3 h-12 bg-white text-black hover:bg-gray-100 font-medium"
+                className="w-full justify-center gap-3 h-12 bg-white text-black hover:bg-gray-100 active:bg-gray-200 font-medium border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                 onClick={() => handleSocialSignup("Google")}
                 data-testid="button-google-signup"
               >
@@ -72,7 +72,7 @@ export default function Signup() {
               </Button>
 
               <Button
-                className="w-full justify-center gap-3 h-12 bg-white text-black hover:bg-gray-100 font-medium"
+                className="w-full justify-center gap-3 h-12 bg-white text-black hover:bg-gray-100 active:bg-gray-200 font-medium border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                 onClick={() => handleSocialSignup("Apple")}
                 data-testid="button-apple-signup"
               >
@@ -93,7 +93,7 @@ export default function Signup() {
 
               <Button
                 variant="outline"
-                className="w-full justify-center gap-3 h-12 bg-transparent border-gray-600 text-white hover:bg-gray-800 font-medium"
+                className="w-full justify-center gap-3 h-12 bg-transparent border-gray-600 text-white hover:bg-gray-800 active:bg-gray-700 font-medium focus-visible:ring-0 focus-visible:ring-offset-0"
                 onClick={handleEmailSignup}
                 data-testid="button-email-signup"
               >
