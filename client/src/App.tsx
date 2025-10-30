@@ -9,6 +9,9 @@ import Signup from "@/pages/Signup";
 import Discover from "@/pages/Discover";
 import ChatSimulation from "@/pages/ChatSimulation";
 import SceneDetail from "@/pages/SceneDetail";
+import Profile from "@/pages/Profile";
+import Settings from "@/pages/Settings";
+import Policies from "@/pages/Policies";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -21,6 +24,9 @@ function Router() {
       <Route path="/discover" component={Discover} />
       <Route path="/scene/:id" component={SceneDetail} />
       <Route path="/chat/:id" component={ChatSimulation} />
+      <Route path="/profile" component={Profile} />
+      <Route path="/settings" component={Settings} />
+      <Route path="/policies" component={Policies} />
       <Route path="/landing" component={Landing} />
       <Route component={NotFound} />
     </Switch>

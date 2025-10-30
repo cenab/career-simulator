@@ -1,7 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Plus, Compass, Sparkles, Search, ChevronLeft, MessageSquare, Menu, ChevronRight } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Plus, Compass, Sparkles, Search, ChevronLeft, MessageSquare, Menu, ChevronRight, User, Settings as SettingsIcon, FileText, LogOut, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "wouter";
 import { useState, useRef } from "react";
@@ -263,12 +269,35 @@ export default function Discover() {
             </nav>
 
             <div className="p-3">
-              <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-user-profile">
-                <Avatar className="w-8 h-8">
-                  <AvatarFallback>DA</AvatarFallback>
-                </Avatar>
-                <span className="text-sm truncate">DizzyingArredale3060</span>
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="w-full justify-start gap-3" data-testid="button-user-profile">
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback>DA</AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm truncate">DizzyingArredale3060</span>
+                    <ChevronDown className="w-4 h-4 ml-auto" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem onClick={() => setLocation('/profile')} data-testid="menu-profile">
+                    <User className="w-4 h-4 mr-2" />
+                    Public profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLocation('/settings')} data-testid="menu-settings">
+                    <SettingsIcon className="w-4 h-4 mr-2" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLocation('/policies')} data-testid="menu-policies">
+                    <FileText className="w-4 h-4 mr-2" />
+                    Policies
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLocation('/login')} data-testid="menu-logout">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </>
         )}
