@@ -69,13 +69,10 @@ export default function CreateCharacter() {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
         <div className="max-w-3xl mx-auto p-8 space-y-6">
-          <div className="flex items-center justify-between">
+          <div>
             <Button variant="ghost" onClick={() => setLocation('/home')} data-testid="button-back">
               <ChevronLeft className="w-4 h-4 mr-2" />
               Back
-            </Button>
-            <Button variant="outline" data-testid="button-view-character-book">
-              View Character Book
             </Button>
           </div>
 
