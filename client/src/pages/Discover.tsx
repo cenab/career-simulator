@@ -263,15 +263,26 @@ export default function Discover() {
         )}
       </aside>
 
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-6xl mx-auto p-8 space-y-8">
-          <div>
-            <h1 className="text-2xl font-semibold text-foreground mb-1">Welcome back,</h1>
-            <div className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-primary"></span>
-              <h2 className="text-2xl font-semibold text-foreground">DizzyingArredale3060</h2>
-            </div>
+      <main className="flex-1 overflow-y-auto flex flex-col">
+        <header className="border-b border-border p-4 flex items-center justify-end">
+          <div className="relative w-80">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder="Search"
+              className="pl-9 h-9"
+              data-testid="input-top-search"
+            />
           </div>
+        </header>
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-6xl mx-auto p-8 space-y-8">
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground mb-1">Welcome back,</h1>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                <h2 className="text-2xl font-semibold text-foreground">DizzyingArredale3060</h2>
+              </div>
+            </div>
 
           <section>
             <h2 className="text-xl font-semibold text-foreground mb-4" data-testid="heading-for-you">For you</h2>
@@ -308,6 +319,7 @@ export default function Discover() {
               ))}
             </div>
           </section>
+          </div>
         </div>
       </main>
     </div>
