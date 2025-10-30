@@ -9,14 +9,51 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Plus, Compass, Sparkles, Search, ChevronLeft, Menu, Play, MessageSquare, Mic, Phone, ThumbsUp, ThumbsDown, Copy, MoreHorizontal, Share2, History, Palette, Pin, User, Sliders, Settings as SettingsIcon, FileText, LogOut, ChevronDown, UserCircle, Image, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation } from "wouter";
 import crisisImage from "@assets/generated_images/Crisis_Manager_scene_thumbnail_43e30343.png";
+
+interface Message {
+  id: string;
+  content: string;
+  sender: 'user' | 'ai';
+  timestamp: Date;
+}
 
 export default function ChatSimulation() {
   const [, setLocation] = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      content: 'You were sitting in class, looking at the clock. The minutes were going by slowly, really slowly. That\'s when there\'s a knock on the door.\n\nThe teacher walks over and opens the door, and there stands the whole task force 141, aka: Your guardians.\n\nPrice: "Excuse me, we\'ve here to pull DizzyingArredale3060 out of class. It\'s an emergency." The teacher looks stunned at the 6 men outside her classroom.',
+      sender: 'ai',
+      timestamp: new Date(),
+    }
+  ]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      const newMessage: Message = {
+        id: Date.now().toString(),
+        content: message.trim(),
+        sender: 'user',
+        timestamp: new Date(),
+      };
+      setMessages([...messages, newMessage]);
+      setMessage('');
+    }
+  };
 
   return (
     <div className="flex h-screen w-full bg-background">
@@ -149,43 +186,50 @@ export default function ChatSimulation() {
           {/* Chat Messages */}
           <div className="flex-1 overflow-y-auto px-8 pb-4">
             <div className="max-w-3xl mx-auto space-y-4">
-              {/* AI Message */}
-              <div className="flex gap-3">
-                <Avatar className="w-8 h-8 flex-shrink-0">
-                  <AvatarFallback className="bg-muted text-xs">TF</AvatarFallback>
-                </Avatar>
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-white">Task Force 141</span>
-                    <Play className="w-3 h-3 text-white/50" />
-                  </div>
-                  <div className="bg-card rounded-2xl rounded-tl-sm p-4 text-sm text-card-foreground">
-                    <p className="mb-2 italic text-muted-foreground">
-                      You were sitting in class, looking at the clock. The minutes were going by slowly, really slowly. That's when there's a knock on the door.
-                    </p>
-                    <p className="mb-2">
-                      The teacher walks over and opens the door, and there stands the whole task force 141, aka: Your guardians.
-                    </p>
-                    <p className="mb-2">
-                      Price: "Excuse me, we've here to pull DizzyingArredale3060 out of class. It's an emergency." The teacher looks stunned at the 6 men outside her classroom.
-                    </p>
-                    <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
-                      <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-like">
-                        <ThumbsUp className="w-3.5 h-3.5" />
-                      </Button>
-                      <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-dislike">
-                        <ThumbsDown className="w-3.5 h-3.5" />
-                      </Button>
-                      <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-copy">
-                        <Copy className="w-3.5 h-3.5" />
-                      </Button>
-                      <Button variant="ghost" size="icon" className="h-7 w-7 ml-auto" data-testid="button-more">
-                        <MoreHorizontal className="w-3.5 h-3.5" />
-                      </Button>
+              {messages.map((msg) => (
+                msg.sender === 'ai' ? (
+                  <div key={msg.id} className="flex gap-3">
+                    <Avatar className="w-8 h-8 flex-shrink-0">
+                      <AvatarFallback className="bg-muted text-xs">TF</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 space-y-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-white">Task Force 141</span>
+                        <Play className="w-3 h-3 text-white/50" />
+                      </div>
+                      <div className="bg-card rounded-2xl rounded-tl-sm p-4 text-sm text-card-foreground">
+                        <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                        <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
+                          <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-like">
+                            <ThumbsUp className="w-3.5 h-3.5" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-dislike">
+                            <ThumbsDown className="w-3.5 h-3.5" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-copy">
+                            <Copy className="w-3.5 h-3.5" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-7 w-7 ml-auto" data-testid="button-more">
+                            <MoreHorizontal className="w-3.5 h-3.5" />
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                ) : (
+                  <div key={msg.id} className="flex gap-3 justify-end">
+                    <div className="flex-1 max-w-[80%] flex justify-end">
+                      <div className="bg-primary rounded-2xl rounded-tr-sm p-4 text-sm text-primary-foreground">
+                        <p className="whitespace-pre-wrap break-words">{msg.content}</p>
+                      </div>
+                    </div>
+                    <Avatar className="w-8 h-8 flex-shrink-0">
+                      <AvatarFallback className="text-xs">DA</AvatarFallback>
+                    </Avatar>
+                  </div>
+                )
+              ))}
+              <div ref={messagesEndRef} />
             </div>
           </div>
 
@@ -200,9 +244,7 @@ export default function ChatSimulation() {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    if (message.trim()) {
-                      setMessage('');
-                    }
+                    handleSendMessage();
                   }
                 }}
                 data-testid="input-message"
@@ -218,11 +260,7 @@ export default function ChatSimulation() {
                   variant="default" 
                   size="icon" 
                   className="h-8 w-8" 
-                  onClick={() => {
-                    if (message.trim()) {
-                      setMessage('');
-                    }
-                  }}
+                  onClick={handleSendMessage}
                   disabled={!message.trim()}
                   data-testid="button-send"
                 >
