@@ -45,7 +45,7 @@ export default function Signup() {
       </nav>
 
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="relative flex items-center justify-end w-full max-w-[1440px] px-4 lg:px-12">
+        <div className="relative flex items-center justify-start w-full max-w-[1440px] px-4 lg:px-12">
           <div className="absolute w-[75%] h-[580px] rounded-2xl overflow-hidden top-1/2 -translate-y-1/2 left-[23%] hidden lg:block">
             <img
               src={heroImage}
