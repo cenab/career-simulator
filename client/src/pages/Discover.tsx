@@ -264,7 +264,7 @@ export default function Discover() {
       </aside>
 
       <main className="flex-1 overflow-y-auto flex flex-col">
-        <header className="border-b border-border p-4 flex items-center justify-end">
+        <header className="p-4 flex items-center justify-end">
           <div className="relative w-80">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
