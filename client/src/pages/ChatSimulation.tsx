@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Plus, Compass, Sparkles, Search, ChevronLeft, Menu, Play, MessageSquare, Mic, Phone, ThumbsUp, ThumbsDown, Copy, MoreHorizontal, Share2, History, Palette, Pin, User, Sliders, Settings as SettingsIcon, FileText, LogOut, ChevronDown, UserCircle, Image } from "lucide-react";
+import { Plus, Compass, Sparkles, Search, ChevronLeft, Menu, Play, MessageSquare, Mic, Phone, ThumbsUp, ThumbsDown, Copy, MoreHorizontal, Share2, History, Palette, Pin, User, Sliders, Settings as SettingsIcon, FileText, LogOut, ChevronDown, UserCircle, Image, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useLocation } from "wouter";
@@ -194,9 +194,17 @@ export default function ChatSimulation() {
             <div className="max-w-3xl mx-auto relative">
               <Textarea
                 placeholder="Message Task Force 141..."
-                className="min-h-[60px] pr-24 resize-none"
+                className="min-h-[60px] pr-32 resize-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (message.trim()) {
+                      setMessage('');
+                    }
+                  }
+                }}
                 data-testid="input-message"
               />
               <div className="absolute right-2 bottom-2 flex items-center gap-2">
@@ -205,6 +213,20 @@ export default function ChatSimulation() {
                 </Button>
                 <Button variant="ghost" size="icon" className="h-8 w-8" data-testid="button-call">
                   <Phone className="w-4 h-4" />
+                </Button>
+                <Button 
+                  variant="default" 
+                  size="icon" 
+                  className="h-8 w-8" 
+                  onClick={() => {
+                    if (message.trim()) {
+                      setMessage('');
+                    }
+                  }}
+                  disabled={!message.trim()}
+                  data-testid="button-send"
+                >
+                  <Send className="w-4 h-4" />
                 </Button>
               </div>
             </div>
